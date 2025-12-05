@@ -53,7 +53,56 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
  <li>Find its Successors Or neighbors and Check whether the node is visited or not</li>
  <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
 </ol></B>
+##program
+# DFS using Stack (Iterative) - Input Format Based
 
+def dfs(graph, start):
+    visited = set()
+    stack = [start]
+    result = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+            # Add neighbors in reverse order to maintain correct DFS order
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return result
+
+
+# -------------------------
+# MAIN PROGRAM
+# -------------------------
+
+# Read number of nodes and edges
+n, e = map(int, input().split())
+
+graph = {}
+
+# Build graph dictionary
+for _ in range(e):
+    u, v = input().split()
+
+    if u not in graph:
+        graph[u] = []
+    if v not in graph:
+        graph[v] = []
+
+    graph[u].append(v)
+    # If undirected graph, also add reverse
+    # graph[v].append(u)
+
+# Choose starting node (first node in graph)
+start_node = list(graph.keys())[0]
+
+# Perform DFS
+output = dfs(graph, start_node)
+print(output)
 <hr>
 <h3>Sample Input</h3>
 <hr>
