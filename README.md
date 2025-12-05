@@ -78,6 +78,29 @@ def dfs(graph, start):
 
 # -------------------------
 # MAIN PROGRAM
+# # DFS using Stack (Iterative) - Input Format Based
+
+def dfs(graph, start):
+    visited = set()
+    stack = [start]
+    result = []
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+            # Add neighbors in reverse order to maintain correct DFS order
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return result
+
+
+# -------------------------
+# MAIN PROGRAM
 # -------------------------
 
 # Read number of nodes and edges
@@ -103,7 +126,9 @@ start_node = list(graph.keys())[0]
 
 # Perform DFS
 output = dfs(graph, start_node)
-print(output)
+print(output)-------------------------
+
+
 <hr>
 <h3>Sample Input</h3>
 <hr>
